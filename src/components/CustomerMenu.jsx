@@ -104,26 +104,28 @@ function CustomerMenu({ onCartUpdate, onShowSearch }) {
   const availableMenus = data?.data?.filter(menu => menu.is_available) || [];
 
   return (
-    <div className="space-y-4 px-4 py-4 pb-56 md:pb-32">
+    <div className="space-y-5 px-4 py-5 pb-56 md:pb-32">
       {/* Search Bar */}
-      <div className="bg-white rounded-2xl shadow-sm p-3 border border-gray-200">
+      <div className="bg-white rounded-2xl shadow-lg p-4 border border-gray-100 hover:shadow-xl transition-shadow">
         <div className="flex items-center gap-3">
-          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
             type="text"
-            placeholder="Cari menu..."
+            placeholder="Cari menu favorit Anda..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="flex-1 outline-none text-sm"
+            className="flex-1 outline-none text-base font-medium text-gray-800 placeholder:text-gray-400"
           />
           {searchInput && (
-            <button 
+            <button
               onClick={() => setSearchInput('')}
-              className="text-gray-400 hover:text-gray-600"
+              className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-all"
             >
-              ✕
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           )}
         </div>
@@ -131,22 +133,24 @@ function CustomerMenu({ onCartUpdate, onShowSearch }) {
 
       {/* Kategori Icons */}
       <div>
-        <h3 className="text-lg font-bold text-gray-900 mb-3">Kategori</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-4 tracking-tight">Kategori</h3>
         <div className="grid grid-cols-4 gap-3">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => handleCategoryClick(cat.id)}
-              className={`flex flex-col items-center gap-2 p-3 rounded-2xl transition-all ${
+              className={`flex flex-col items-center gap-2 p-4 rounded-2xl transition-all transform hover:scale-105 active:scale-95 ${
                 selectedCategory === cat.id
-                  ? 'bg-orange-50 border-2 border-orange-500'
-                  : 'bg-white border border-gray-200 hover:border-gray-300'
+                  ? 'bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-500 shadow-lg'
+                  : 'bg-white border-2 border-gray-200 hover:border-orange-300 hover:shadow-md'
               }`}
             >
-              <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center text-2xl shadow-md`}>
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center text-3xl shadow-lg`}>
                 {cat.icon}
               </div>
-              <span className="text-xs font-medium text-gray-800">{cat.name}</span>
+              <span className={`text-xs font-bold ${
+                selectedCategory === cat.id ? 'text-orange-600' : 'text-gray-700'
+              }`}>{cat.name}</span>
             </button>
           ))}
         </div>
@@ -176,15 +180,15 @@ function CustomerMenu({ onCartUpdate, onShowSearch }) {
             </div>
           ) : (
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 tracking-tight">
                 {selectedCategory ? `Menu ${categories.find(c => c.id === selectedCategory)?.name}` : 'Semua Menu'}
               </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
                 {availableMenus.map((menu) => (
-                  <div 
-                    key={menu.id} 
+                  <div
+                    key={menu.id}
                     onClick={() => setSelectedMenu(menu)}
-                    className="bg-white rounded-2xl p-4 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer relative group hover:scale-105 active:scale-95"
+                    className="bg-white rounded-3xl p-5 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer relative group hover:scale-105 active:scale-95 border border-gray-100"
                   >
                     {/* Fire Badge for popular items */}
                     {menu.is_popular && (

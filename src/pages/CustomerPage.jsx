@@ -46,20 +46,23 @@ function CustomerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-24">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50/30 pb-24">
       {/* Header with Borneo Branding */}
-      <header className="bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg px-4 py-4 sticky top-0 z-50">
+      <header className="bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 shadow-2xl px-4 py-5 sticky top-0 z-50 backdrop-blur-lg">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-orange-600 text-xl font-bold shadow-md">
-              {sessionData?.customerName?.charAt(0).toUpperCase() || 'U'}
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <div className="absolute inset-0 bg-white/20 rounded-full blur-lg"></div>
+              <div className="relative w-14 h-14 rounded-full bg-white flex items-center justify-center text-orange-600 text-2xl font-bold shadow-xl ring-4 ring-white/20">
+                {sessionData?.customerName?.charAt(0).toUpperCase() || 'U'}
+              </div>
             </div>
             <div>
-              <p className="text-xs font-bold text-orange-100">🏝️ Warung Borneo</p>
-              <p className="text-sm text-white">Meja {sessionData?.tableNumber} • {sessionData?.customerName}</p>
+              <p className="text-sm font-bold text-orange-100 tracking-wide">Warung Borneo</p>
+              <p className="text-base text-white font-medium">Meja {sessionData?.tableNumber} • {sessionData?.customerName}</p>
             </div>
           </div>
-          <button 
+          <button
             onClick={() => {
               setConfirmDialog({
                 title: 'Keluar dari Session',
@@ -73,9 +76,11 @@ function CustomerPage() {
                 },
               })
             }}
-            className="w-10 h-10 rounded-full border-2 border-white/30 flex items-center justify-center hover:bg-white/20 transition-all text-white"
+            className="w-12 h-12 rounded-full border-2 border-white/40 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all text-white shadow-lg"
           >
-            <span className="text-xl">🚪</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
           </button>
         </div>
       </header>
@@ -90,35 +95,43 @@ function CustomerPage() {
 
       {/* Bottom Navigation - Hidden when AI Chat is open */}
       {!showAIChat && (
-        <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
-        <div className="flex items-center justify-around max-w-7xl mx-auto">
-          <button 
-            className={`flex flex-col items-center py-3 px-8 transition-all ${
-              activeView === 'menu' ? 'text-orange-500' : 'text-gray-400'
+        <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl shadow-2xl border-t border-gray-200 z-50">
+        <div className="flex items-center justify-around max-w-7xl mx-auto py-1">
+          <button
+            className={`flex flex-col items-center py-3 px-8 rounded-2xl transition-all transform ${
+              activeView === 'menu' ? 'text-orange-500 scale-110' : 'text-gray-400 hover:text-gray-600'
             }`}
             onClick={() => setActiveView('menu')}
           >
-            <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            <span className="text-xs font-medium">Menu</span>
+            <div className={`p-2 rounded-xl transition-all ${
+              activeView === 'menu' ? 'bg-orange-100' : 'bg-transparent'
+            }`}>
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <span className="text-xs font-bold mt-1">Menu</span>
           </button>
-          
-          <button 
-            className={`flex flex-col items-center py-3 px-8 transition-all relative ${
-              activeView === 'cart' ? 'text-orange-500' : 'text-gray-400'
+
+          <button
+            className={`flex flex-col items-center py-3 px-8 rounded-2xl transition-all transform relative ${
+              activeView === 'cart' ? 'text-orange-500 scale-110' : 'text-gray-400 hover:text-gray-600'
             }`}
             onClick={() => setActiveView('cart')}
           >
-            <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+            <div className={`p-2 rounded-xl transition-all ${
+              activeView === 'cart' ? 'bg-orange-100' : 'bg-transparent'
+            }`}>
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
             {cartItemCount > 0 && (
-              <span className="absolute top-1 right-3 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+              <span className="absolute top-1 right-3 w-6 h-6 bg-gradient-to-br from-red-500 to-red-600 text-white text-xs font-bold rounded-full flex items-center justify-center shadow-lg animate-pulse">
                 {cartItemCount}
               </span>
             )}
-            <span className="text-xs font-medium">Cart</span>
+            <span className="text-xs font-bold mt-1">Cart</span>
           </button>
         </div>
       </nav>
@@ -128,9 +141,12 @@ function CustomerPage() {
       {!showAIChat && (
         <button
           onClick={() => setShowAIChat(true)}
-          className="fixed bottom-20 left-4 md:bottom-6 md:left-6 w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-full shadow-2xl flex items-center justify-center text-white text-2xl transition-all hover:scale-110 z-40"
+          className="fixed bottom-24 left-4 md:bottom-6 md:left-6 w-20 h-20 bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 hover:from-orange-600 hover:via-orange-700 hover:to-orange-800 rounded-full shadow-2xl flex items-center justify-center text-white text-3xl transition-all hover:scale-110 active:scale-95 z-40 ring-4 ring-orange-200"
         >
-          <span className="animate-pulse">🌴</span>
+          <div className="relative">
+            <div className="absolute inset-0 bg-white/20 rounded-full blur-xl animate-pulse"></div>
+            <span className="relative text-3xl animate-bounce">🌴</span>
+          </div>
         </button>
       )}
 
