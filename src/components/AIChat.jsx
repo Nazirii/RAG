@@ -180,7 +180,7 @@ const AIChat = ({ onClose }) => {
           
           <div className="flex items-center gap-3 mb-2">
             <div className="w-20 h-20  flex items-center  text-2xl ">
-              <img src="/public/narsisssss.png" alt="Logo" className=" rounded-xl" />
+              <img src="/narsisssss.png" alt="Logo" className=" rounded-xl" />
             </div>
             <div>
               <h2 className="text-xl font-bold">Naziri</h2>
@@ -202,7 +202,7 @@ const AIChat = ({ onClose }) => {
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 pb-24">
           {messages.length === 0 && (
             <div className="text-center text-gray-500 mt-12">
-              {/* <div className=" mb-3"><img src="\public\oo.png" alt="" /></div> */}
+              {/* <div className=" mb-3"><img src="/oo.png" alt="" /></div> */}
               <p className="text-base font-medium text-gray-800">Halo dari Naziri!</p>
               <p className="text-sm mt-2 text-gray-600">Tanya menu, pesan makanan, atau minta rekomendasi</p>
             </div>

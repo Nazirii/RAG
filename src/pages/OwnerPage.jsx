@@ -17,7 +17,7 @@ function OwnerPage() {
               <div className="relative">
                 <div className="absolute inset-0 bg-white/20 rounded-full blur-xl"></div>
                 <div className="relative w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-2xl ring-4 ring-white/30">
-                  <img src="\public\narsisssss.png" alt="" className="rounded-full w-20 border-white border-4" />
+                  <img src="/narsisssss.png" alt="" className="rounded-full w-20 border-white border-4" />
                 </div>
               </div>
               <div>
