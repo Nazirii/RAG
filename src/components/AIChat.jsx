@@ -228,7 +228,11 @@ const AIChat = ({ onClose }) => {
               >
                 {/* Message Text */}
                 <div className="whitespace-pre-wrap break-words">
-                  {msg.parts[0]?.text}
+                  {msg.parts
+                    .filter(part => part.text)
+                    .map((part, idx) => (
+                      <span key={idx}>{part.text}</span>
+                    ))}
                 </div>
 
                 {/* Action Notifications */}
